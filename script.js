@@ -5,46 +5,46 @@ function computerPlay(choices) {
     return choices[randIndex];
 }
 
-let computerChoice = computerPlay(choices);
-
-let userChoice = prompt("Choose: Rock, Paper, or Scissors").toLowerCase();
-
 function validateUserChoice(userChoice, choices) {
     return choices.includes(userChoice);
 }
 
 function compare(userChoice, compChoice) {
-    if (userChoice === 'Rock') {
-        if (compChoice === 'Rock') {
+    if (userChoice === 'rock') {
+        if (compChoice === 'rock') {
             return 'draw';
         }
-        if (compChoice === 'Paper') {
+        if (compChoice === 'paper') {
             return 'win';
         }
-        if (compChoice === 'Scissors') {
+        if (compChoice === 'scissors') {
             return 'lose';
         }
     }
-    if (userChoice === 'Paper') {
-        if (compChoice === 'Rock') {
+    if (userChoice === 'paper') {
+        if (compChoice === 'rock') {
             return 'win';
         }
-        if (compChoice === 'Paper') {
+        if (compChoice === 'paper') {
             return 'draw';
         }
-        if (compChoice === 'Scissors') {
+        if (compChoice === 'scissors') {
             return 'lose';
         }
     }
-    if (userChoice === 'Scissors') {
-        if (compChoice === 'Rock') {
+    if (userChoice === 'scissors') {
+        if (compChoice === 'rock') {
             return 'lose';
         }
-        if (compChoice === 'Paper') {
+        if (compChoice === 'paper') {
             return 'win';
         }
-        if (compChoice === 'Scissors') {
+        if (compChoice === 'scissors') {
             return 'draw';
         }
     }
 }
+
+let computerChoice = computerPlay(choices);
+
+let userChoice = prompt("Choose: Rock, Paper, or Scissors").toLowerCase();
