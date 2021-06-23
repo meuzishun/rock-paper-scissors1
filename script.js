@@ -15,10 +15,10 @@ function compare(userChoice, compChoice) {
             return 'draw';
         }
         if (compChoice === 'paper') {
-            return 'win';
+            return 'lose';
         }
         if (compChoice === 'scissors') {
-            return 'lose';
+            return 'win';
         }
     }
     if (userChoice === 'paper') {
@@ -46,5 +46,10 @@ function compare(userChoice, compChoice) {
 }
 
 let computerChoice = computerPlay(choices);
-
 let userChoice = prompt("Choose: Rock, Paper, or Scissors").toLowerCase();
+while (!validateUserChoice(userChoice, choices)) {
+    userChoice = prompt("Please choose ONLY: Rock, Paper, or Scissors").toLowerCase();
+}
+let result = compare(userChoice, computerChoice);
+
+console.log(result);
