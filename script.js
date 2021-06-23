@@ -5,6 +5,8 @@ function computerPlay(choices) {
     return choices[randIndex];
 }
 
+let computerChoice = computerPlay(choices);
+
 let userChoice = prompt("Choose: Rock, Paper, or Scissors").toLowerCase();
 
 function validateUserChoice(userChoice, choices) {
