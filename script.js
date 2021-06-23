@@ -1,7 +1,14 @@
-function computerPlay() {
-    let choices = ['Rock', 'Paper', 'Scissors'];
+let choices = ['rock', 'paper', 'scissors'];
+
+function computerPlay(choices) {
     let randIndex = Math.floor(Math.random() * choices.length);
     return choices[randIndex];
+}
+
+let userChoice = prompt("Choose: Rock, Paper, or Scissors").toLowerCase();
+
+function validateUserChoice(userChoice, choices) {
+    return choices.includes(userChoice);
 }
 
 function compare(userChoice, compChoice) {
