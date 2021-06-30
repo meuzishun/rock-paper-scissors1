@@ -55,10 +55,7 @@ function processResults(result) {
         const resetBtn = document.createElement('button');
         resetBtn.id = 'reset-btn';
         resetBtn.textContent = 'Reset';
-        resetBtn.addEventListener('click', () => {
-            clearResults();
-            resetBtn.parentElement.removeChild(resetBtn);
-        });
+        resetBtn.addEventListener('click', clearResults);
         document.body.appendChild(resetBtn);
     }
 }
@@ -74,6 +71,8 @@ function clearResults() {
     if (totalResult) {
         totalResult.parentElement.removeChild(totalResult);
     }
+    const resetBtn = document.querySelector('#reset-btn');
+    resetBtn.parentElement.removeChild(resetBtn);
 }
 
 for (let i = 0; i < choices.length; i++) {
