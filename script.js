@@ -27,6 +27,13 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function getChoicesAndPlay(e) {
+    const playerSelection = format(e.target.dataset.choice);
+    const computerSelection = computerPlay();
+    const result = playRound(playerSelection, computerSelection);
+    processResults(result);
+}
+
 let wins = 0;
 let losses = 0;
 
@@ -57,6 +64,9 @@ function processResults(result) {
         resetBtn.textContent = 'Reset';
         resetBtn.addEventListener('click', clearResults);
         document.body.appendChild(resetBtn);
+
+        const choices = [...document.querySelectorAll('.choice')];
+        choices.forEach(choice => choice.removeEventListener('click', getChoicesAndPlay));
     }
 }
 
@@ -73,6 +83,9 @@ function clearResults() {
     }
     const resetBtn = document.querySelector('#reset-btn');
     resetBtn.parentElement.removeChild(resetBtn);
+
+    const choices = [...document.querySelectorAll('.choice')];
+    choices.forEach(choice => choice.addEventListener('click', getChoicesAndPlay));
 }
 
 for (let i = 0; i < choices.length; i++) {
@@ -80,15 +93,11 @@ for (let i = 0; i < choices.length; i++) {
 
     const btn = document.createElement('button');
     btn.id = choice;
+    btn.classList.add('choice');
     btn.dataset.choice = choice;
     btn.textContent = choices[i];
 
-    btn.addEventListener('click', (e) => {
-        const playerSelection = format(e.target.dataset.choice);
-        const computerSelection = computerPlay();
-        const result = playRound(playerSelection, computerSelection);
-        processResults(result);
-    });
+    btn.addEventListener('click', getChoicesAndPlay);
 
     document.body.appendChild(btn);
 }
