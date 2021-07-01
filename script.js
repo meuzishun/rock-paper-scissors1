@@ -1,5 +1,8 @@
 const choices = ['Rock', 'Paper', 'Scissors'];
 
+let wins = 0;
+let losses = 0;
+
 function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -10,6 +13,13 @@ function format(str) {
     arr[0] = arr[0].toUpperCase();
     str = arr.join(''); 
     return str;
+}
+
+function getChoicesAndPlay(e) {
+    const playerSelection = format(e.target.dataset.choice);
+    const computerSelection = computerPlay();
+    const result = playRound(playerSelection, computerSelection);
+    processResults(result);
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -27,15 +37,23 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function getChoicesAndPlay(e) {
-    const playerSelection = format(e.target.dataset.choice);
-    const computerSelection = computerPlay();
-    const result = playRound(playerSelection, computerSelection);
-    processResults(result);
+function clearResults() {
+    wins = 0;
+    losses = 0;
+    const singleResults = [...document.querySelectorAll('.single-result')];
+    singleResults.forEach(result => {
+        result.parentElement.removeChild(result);
+    });
+    const totalResult = document.querySelector('#total-result');
+    if (totalResult) {
+        totalResult.parentElement.removeChild(totalResult);
+    }
+    const resetBtn = document.querySelector('#reset-btn');
+    resetBtn.parentElement.removeChild(resetBtn);
+    
+    // const choiceBtns = [...document.querySelectorAll('.choice')];
+    choiceBtns.forEach(btn => btn.disabled = false);
 }
-
-let wins = 0;
-let losses = 0;
 
 function processResults(result) {
     if (result.indexOf("Win") !== -1) {
@@ -65,43 +83,31 @@ function processResults(result) {
         resetBtn.addEventListener('click', clearResults);
         document.body.appendChild(resetBtn);
 
-        const choiceBtns = [...document.querySelectorAll('.choice')];
+        // const choiceBtns = [...document.querySelectorAll('.choice')];
         choiceBtns.forEach(btn => btn.disabled = true);
     }
 }
 
-function clearResults() {
-    wins = 0;
-    losses = 0;
-    const singleResults = [...document.querySelectorAll('.single-result')];
-    singleResults.forEach(result => {
-        result.parentElement.removeChild(result);
-    });
-    const totalResult = document.querySelector('#total-result');
-    if (totalResult) {
-        totalResult.parentElement.removeChild(totalResult);
-    }
-    const resetBtn = document.querySelector('#reset-btn');
-    resetBtn.parentElement.removeChild(resetBtn);
+function createInputBtns() {
+    let btns = [];
+    for (let i = 0; i < choices.length; i++) {
+        const choice = choices[i].toLowerCase();
     
-    const choiceBtns = [...document.querySelectorAll('.choice')];
-    choiceBtns.forEach(btn => btn.disabled = false);
+        const btn = document.createElement('button');
+        btn.id = choice;
+        btn.classList.add('choice');
+        btn.dataset.choice = choice;
+        btn.textContent = choices[i];
+    
+        btn.addEventListener('click', getChoicesAndPlay);
+    
+        document.body.appendChild(btn);
+        btns.push(btn);
+    }
+    return btns;
 }
 
-for (let i = 0; i < choices.length; i++) {
-    const choice = choices[i].toLowerCase();
-
-    const btn = document.createElement('button');
-    btn.id = choice;
-    btn.classList.add('choice');
-    btn.dataset.choice = choice;
-    btn.textContent = choices[i];
-
-    btn.addEventListener('click', getChoicesAndPlay);
-
-    document.body.appendChild(btn);
-}
-
+const choiceBtns = createInputBtns();
 const resultDisplay = document.createElement('div');
 resultDisplay.id = 'result-display';
 document.body.appendChild(resultDisplay);
