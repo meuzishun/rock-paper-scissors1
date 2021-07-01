@@ -40,6 +40,7 @@ function playRound(playerSelection, computerSelection) {
 function clearResults() {
     wins = 0;
     losses = 0;
+
     const singleResults = [...document.querySelectorAll('.single-result')];
     singleResults.forEach(result => {
         result.parentElement.removeChild(result);
@@ -51,7 +52,6 @@ function clearResults() {
     const resetBtn = document.querySelector('#reset-btn');
     resetBtn.parentElement.removeChild(resetBtn);
     
-    // const choiceBtns = [...document.querySelectorAll('.choice')];
     choiceBtns.forEach(btn => btn.disabled = false);
 }
 
@@ -77,13 +77,8 @@ function processResults(result) {
         if (losses === 5) totalResult.textContent = `That's 5 losses...`;
 
         resultDisplay.appendChild(totalResult);
-        const resetBtn = document.createElement('button');
-        resetBtn.id = 'reset-btn';
-        resetBtn.textContent = 'Reset';
-        resetBtn.addEventListener('click', clearResults);
-        document.body.appendChild(resetBtn);
+        resetBtn.style.display = "inline";
 
-        // const choiceBtns = [...document.querySelectorAll('.choice')];
         choiceBtns.forEach(btn => btn.disabled = true);
     }
 }
@@ -108,6 +103,14 @@ function createInputBtns() {
 }
 
 const choiceBtns = createInputBtns();
+
 const resultDisplay = document.createElement('div');
 resultDisplay.id = 'result-display';
 document.body.appendChild(resultDisplay);
+
+const resetBtn = document.createElement('button');
+resetBtn.id = 'reset-btn';
+resetBtn.textContent = 'Reset';
+resetBtn.addEventListener('click', clearResults);
+resetBtn.style.display = 'none';
+document.body.appendChild(resetBtn);
