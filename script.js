@@ -65,8 +65,8 @@ function processResults(result) {
         resetBtn.addEventListener('click', clearResults);
         document.body.appendChild(resetBtn);
 
-        const choices = [...document.querySelectorAll('.choice')];
-        choices.forEach(choice => choice.removeEventListener('click', getChoicesAndPlay));
+        const choiceBtns = [...document.querySelectorAll('.choice')];
+        choiceBtns.forEach(btn => btn.disabled = true);
     }
 }
 
@@ -83,9 +83,9 @@ function clearResults() {
     }
     const resetBtn = document.querySelector('#reset-btn');
     resetBtn.parentElement.removeChild(resetBtn);
-
-    const choices = [...document.querySelectorAll('.choice')];
-    choices.forEach(choice => choice.addEventListener('click', getChoicesAndPlay));
+    
+    const choiceBtns = [...document.querySelectorAll('.choice')];
+    choiceBtns.forEach(btn => btn.disabled = false);
 }
 
 for (let i = 0; i < choices.length; i++) {
