@@ -49,9 +49,8 @@ function clearResults() {
     if (totalResult) {
         totalResult.parentElement.removeChild(totalResult);
     }
-    const resetBtn = document.querySelector('#reset-btn');
-    resetBtn.parentElement.removeChild(resetBtn);
     
+    resetBtn.style.display = 'none';
     choiceBtns.forEach(btn => btn.disabled = false);
 }
 
