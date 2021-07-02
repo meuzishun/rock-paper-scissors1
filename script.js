@@ -3,6 +3,22 @@ const choices = ['Rock', 'Paper', 'Scissors'];
 let wins = 0;
 let losses = 0;
 
+const btnContainer = document.createElement('div');
+btnContainer.id = 'btn-container';
+document.body.appendChild(btnContainer);
+const choiceBtns = createInputBtns();
+
+const resultDisplay = document.createElement('div');
+resultDisplay.id = 'result-display';
+document.body.appendChild(resultDisplay);
+
+const resetBtn = document.createElement('button');
+resetBtn.id = 'reset-btn';
+resetBtn.textContent = 'Reset';
+resetBtn.addEventListener('click', clearResults);
+resetBtn.style.display = 'none';
+document.body.appendChild(resetBtn);
+
 function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -95,21 +111,10 @@ function createInputBtns() {
     
         btn.addEventListener('click', getChoicesAndPlay);
     
-        document.body.appendChild(btn);
+        btnContainer.appendChild(btn);
         btns.push(btn);
     }
     return btns;
 }
 
-const choiceBtns = createInputBtns();
 
-const resultDisplay = document.createElement('div');
-resultDisplay.id = 'result-display';
-document.body.appendChild(resultDisplay);
-
-const resetBtn = document.createElement('button');
-resetBtn.id = 'reset-btn';
-resetBtn.textContent = 'Reset';
-resetBtn.addEventListener('click', clearResults);
-resetBtn.style.display = 'none';
-document.body.appendChild(resetBtn);
